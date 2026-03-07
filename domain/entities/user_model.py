@@ -1,0 +1,28 @@
+from dataclasses import dataclass
+from .role_model import RoleModel
+from uuid import UUID
+from typing import List
+import datetime
+
+
+@dataclass
+class UserModel:
+    id: UUID | None
+    first_name: str
+    last_name: str
+    email: str
+    middle_name: str | None = None
+    hashed_password: str | None = None
+    is_active: bool = False
+    is_verified: bool = False
+    is_deleted: bool = False
+    failed_login_attempts: int = 0
+    locked_until: datetime.datetime | None = None
+    created_at: datetime.datetime | None = None
+    updated_at: datetime.datetime | None = None
+
+
+@dataclass
+class UserWithRolesModel():
+    user:UserModel
+    roles: List[RoleModel] 
