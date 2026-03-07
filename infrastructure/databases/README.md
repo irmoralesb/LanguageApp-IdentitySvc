@@ -1,6 +1,6 @@
-# MicroservicesLab-IdentityService
+# LanguageApp-IdentitySvc
 
-FastAPI-based identity microservice using SQLAlchemy 2.x with async sessions and SQL Server 2022 as the backing store.
+FastAPI-based identity microservice for LanguageApp using SQLAlchemy 2.x with async sessions and SQL Server 2022 as the backing store.
 
 ## Database drivers
 
@@ -40,6 +40,6 @@ Required variables:
 - `IDENTITY_DATABASE_URL` – async SQLAlchemy URL for application traffic (pyodbc or aioodbc).
 - `IDENTITY_DATABASE_MIGRATION_URL` – sync SQLAlchemy URL for Alembic migrations.
 - `LOG_LEVEL` – logging level (e.g., INFO, DEBUG).
-- `CORS_ALLOW_ORIGINS` – comma-separated origins for CORS (e.g., https://app.example.com,https://admin.example.com).
+- `CORS_ALLOW_ORIGINS` – comma-separated origins for CORS (e.g., https://api.yourdomain.com,https://app.yourdomain.com).
 - `METRICS_ENABLED` – enable Prometheus metrics (`true`/`false`).
 - `METRICS_ENDPOINT` – path where metrics are exposed (default `/metrics`).
