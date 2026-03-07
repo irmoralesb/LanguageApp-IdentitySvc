@@ -34,6 +34,15 @@ def _load_admin_password() -> str:
     return admin_password
 
 
+def _load_admin_seed() -> tuple[str, str, str]:
+    """Load admin user seed from env with fallbacks for first name, last name, email."""
+    load_dotenv()
+    first_name = os.getenv("ADMIN_FIRST_NAME", "System")
+    last_name = os.getenv("ADMIN_LAST_NAME", "Administrator")
+    email = os.getenv("ADMIN_EMAIL", "admin@email.com")
+    return (first_name, last_name, email)
+
+
 def upgrade() -> None:
     """Upgrade schema and seed catalogs."""
     op.create_table(
@@ -354,6 +363,7 @@ def upgrade() -> None:
 
     admin_password = _load_admin_password()
     admin_hashed_password = CryptContext(schemes=["bcrypt"]).hash(admin_password)
+    admin_first_name, admin_last_name, admin_email = _load_admin_seed()
 
     services_table = sa.table(
         "services",
@@ -431,7 +441,7 @@ def upgrade() -> None:
             {
                 "id": service_id,
                 "name": "identity-service",
-                "description": "Identity service",
+                "description": "LanguageApp Identity Service",
                 "is_active": True,
                 "url": None,
                 "port": None,
@@ -659,10 +669,10 @@ def upgrade() -> None:
         [
             {
                 "id": admin_user_id,
-                "first_name": "System",
+                "first_name": admin_first_name,
                 "middle_name": None,
-                "last_name": "Administrator",
-                "email": "admin@email.com",
+                "last_name": admin_last_name,
+                "email": admin_email,
                 "hashed_password": admin_hashed_password,
                 "is_active": True,
                 "is_verified": True,

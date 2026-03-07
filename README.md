@@ -1,6 +1,6 @@
-# MicroservicesLab-IdentityService
+# LanguageApp-IdentitySvc
 
-Identity microservice built with FastAPI and SQLAlchemy.
+Identity microservice for LanguageApp, built with FastAPI and SQLAlchemy.
 
 ## Documentation
 - For database drivers, connection strings, async runtime details, and environment variables see [databases/README.md](databases/README.md).
@@ -26,4 +26,4 @@ To run this service on Azure Web App for Containers using the Docker image:
 
 4. **Health check**: In Configuration → General settings, set **Health check path** to `/health`.
 
-5. **After deploy**: Open the main site (e.g. `https://your-app.azurewebsites.net`). You should get `/`, `/docs`, and `/health`. Do not use the SCM URL (`https://your-app.scm.azurewebsites.net`).
+5. **After deploy**: Open the main site (e.g. `https://your-identity-service.azurewebsites.net`). You should get `/`, `/docs`, and `/health`. Do not use the SCM URL (`https://your-identity-service.scm.azurewebsites.net`).
