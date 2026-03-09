@@ -29,6 +29,8 @@ build
 venv
 env
 ENV
+.pixi
+__pypackages__
 
 # Tests and dev docs (not needed in production image)
 test_*.py
