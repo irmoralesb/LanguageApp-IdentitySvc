@@ -2,7 +2,39 @@
 
 Backend API responsible for **authentication**, **user directory**, **roles**, **permissions**, **service catalog**, and **user–service assignments** for the LanguageApp platform.
 
+
 It exposes a **FastAPI** application designed to run beside other microservices. The **React** front end (`LanguageApp-Web`) and consumer services rely on JWT access tokens minted here (shared signing key).
+=======
+## CI/CD and Docker
+
+Docker images are built and pushed to **Docker Hub** by GitHub Actions when you push a **tag**. The environment (Prod vs Test) is determined by **which branch contains the tag’s commit**:
+
+- **Tag’s commit on `main`** → **Prod** image is built and pushed (image tag + `latest`).
+- **Tag’s commit on `test`** → **Test** image is built and pushed (image tag only).
+- If the commit is on both branches, **Prod** is used (main takes precedence). If on neither, the workflow is skipped.
+
+### GitHub secrets (required)
+
+In the repo **Settings → Secrets and variables → Actions**, add:
+
+- **`DOCKERHUB_USERNAME`** – your Docker Hub username.
+- **`DOCKERHUB_TOKEN`** – a Docker Hub access token (Account → Security → New Access Token, Read & Write).
+
+### Docker Hub and workflow config
+
+- Create a repository on Docker Hub (e.g. `languageapp-identity`). The workflow uses the repo name set in [.github/workflows/build-and-push-docker.yml](.github/workflows/build-and-push-docker.yml) (`DOCKER_IMAGE_REPO`); change it if your repo name differs.
+- After a tag push, the image is available as `$DOCKERHUB_USERNAME/$DOCKER_IMAGE_REPO:<tag>` (and `:latest` for Prod).
+
+### Azure Web Apps
+
+- **Prod:** Use image `youruser/languageapp-identity:latest` or a specific tag (e.g. `:v1.0.0`).
+- **Test:** Use image `youruser/languageapp-identity:<test-tag>` (e.g. a tag pushed from the `test` branch).
+
+See **Azure Web App** below for required app settings and port.
+
+## Documentation
+- For database drivers, connection strings, async runtime details, and environment variables see [databases/README.md](databases/README.md).
+
 
 ---
 
