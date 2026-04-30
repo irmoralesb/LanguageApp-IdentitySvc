@@ -181,3 +181,6 @@ Controlled by **`LOKI_*`**, **`METRICS_*`**, **`TRACING_*`**, **`TEMPO_*`** (see
 | --- | --- |
 | **`LanguageApp-Web`** | SPA; calls Identity OAuth2 token and admin APIs |
 | **`LanguageApp-PhrasalVerbsSvc`** | Consumer API; verifies JWT issued by Identity (**same signing key**) |
+| **`LanguageApp-PrepositionsSvc`** | Consumer API for prepositions / function-word practice; **`SERVICE_NAME`** must match the `services.name` row (e.g. `prepositions-service`) so JWT `roles` resolve correctly |
+
+RBAC for Prepositions is seeded by Alembic revision `20260428_0002_seed_prepositions_service` (roles `prepositions-user`, `admin`). For manual SQL Server setup, see [scripts/seed_prepositions_service.sql](scripts/seed_prepositions_service.sql).

@@ -53,10 +53,11 @@ class TokenService:
             service_model = await self.service_repo.get_by_id(role.service_id)
             if service_model is None:
                     raise Exception(f"No service found for service id : {service_id}")
-            
-            if service_id not in roles_by_service:
-                roles_by_service[service_model.name] = []
-            roles_by_service[service_model.name].append(role.name)
+
+            service_name = service_model.name
+            if service_name not in roles_by_service:
+                roles_by_service[service_name] = []
+            roles_by_service[service_name].append(role.name)
         
         payload = TokenPayload(
             sub=user.id,
